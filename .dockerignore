@@ -1,0 +1,6 @@
+*
+!pkg
+!ui
+!*.go
+!go.mod
+!go.sum

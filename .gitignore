@@ -1,0 +1,8 @@
+*.sw?
+*.db
+hyperfox
+certs/
+bin/
+vendor/
+go.sum
+.idea
