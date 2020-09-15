@@ -449,7 +449,7 @@ func (p *Proxy) StartSplit(addr string) error {
 
 	//p.srv = srv
 	p.ln = ln
-	p.rt = &http.Transport{ForceAttemptHTTP2: true, MaxConnsPerHost: 300, MaxIdleConnsPerHost: 50, IdleConnTimeout: time.Second * 5}
+	p.rt = &http.Transport{ForceAttemptHTTP2: true, MaxConnsPerHost: 30, MaxIdleConnsPerHost: 10, IdleConnTimeout: time.Second * 5, ReadBufferSize: 4 * 1024, WriteBufferSize: 4 * 1024}
 
 	log.Printf("Listening for HTTP requests at %s (SSL/TLS mode)\n", addr)
 
