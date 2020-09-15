@@ -453,11 +453,11 @@ func (p *Proxy) StartSplit(addr string) error {
 
 	log.Printf("Listening for HTTP requests at %s (SSL/TLS mode)\n", addr)
 
-	srv := &fasthttp.Server{Handler: adaptor.NewFastHTTPHandler(p), MaxRequestBodySize: 4 * 1024 * 1024 * 1024}
+	srv := &fasthttp.Server{Handler: adaptor.NewFastHTTPHandler(p), MaxRequestBodySize: 4 * 1024 * 1024 * 1024, ReduceMemoryUsage: true}
 
 	if err := srv.Serve(tlsListener); err != nil {
 		return err
 	}
-	
+
 	return nil
 }

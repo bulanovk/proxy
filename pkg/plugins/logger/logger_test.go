@@ -28,7 +28,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/bulanovk/mitmproxy/pkg/proxy"
+	"github.com/bulanovk/proxy/pkg/proxy"
 )
 
 const listenHTTPAddr = `127.0.0.1:37400`
