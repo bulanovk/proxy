@@ -449,11 +449,11 @@ func (p *Proxy) StartSplit(addr string) error {
 
 	//p.srv = srv
 	p.ln = ln
-	p.rt = &http.Transport{ForceAttemptHTTP2: true, MaxConnsPerHost: 300, MaxIdleConnsPerHost: 50, IdleConnTimeout: time.Second * 30}
+	p.rt = &http.Transport{ForceAttemptHTTP2: true, MaxConnsPerHost: 300, MaxIdleConnsPerHost: 50, IdleConnTimeout: time.Second * 5}
 
 	log.Printf("Listening for HTTP requests at %s (SSL/TLS mode)\n", addr)
 
-	srv := &fasthttp.Server{Handler: adaptor.NewFastHTTPHandler(p), MaxRequestBodySize: 4 * 1024 * 1024 * 1024, ReduceMemoryUsage: true}
+	srv := &fasthttp.Server{Handler: adaptor.NewFastHTTPHandler(p), MaxRequestBodySize: 4 * 1024 * 1024 * 1024, ReduceMemoryUsage: true, IdleTimeout: time.Second * 5}
 
 	if err := srv.Serve(tlsListener); err != nil {
 		return err
