@@ -193,13 +193,13 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// Copy request.
 
 	*out = *r
-	out.URL.Scheme = r.URL.Scheme
-	/*	if r.TLS == nil {
-			out.URL.Scheme = "http"
-		} else {
-			out.URL.Scheme = "https"
-		}
-	*/
+	//out.URL.Scheme = r.URL.Scheme
+	if r.TLS == nil {
+		out.URL.Scheme = "http"
+	} else {
+		out.URL.Scheme = "https"
+	}
+
 	// Making sure the Host header is present.
 	out.URL.Host = out.Host
 	out.Header.Add("Host", out.Host)
