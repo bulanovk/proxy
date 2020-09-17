@@ -23,14 +23,12 @@
 package proxy
 
 import (
-	"bytes"
 	"context"
 	"crypto/tls"
 	"errors"
 	"fmt"
 	"github.com/bulanovk/proxy/pkg/portmulpilexer"
 	"io"
-	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
@@ -216,7 +214,7 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Intercepting request body.
+	/*// Intercepting request body.
 	body := bytes.NewBuffer(nil)
 	bodyCopy := bytes.NewBuffer(nil)
 
@@ -229,7 +227,7 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		out.Body.Close()
 		out.Body = ioutil.NopCloser(body)
 	}
-
+	*/
 	//startTime := time.Now()
 	// Proxying client request to destination server.
 	var err error
@@ -247,11 +245,11 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// (Response received).
 
-	// Resetting body (so it can be read later)
+	/*// Resetting body (so it can be read later)
 	if out.Body != nil {
 		out.Body = ioutil.NopCloser(bodyCopy)
 	}
-
+	*/
 	// Walking over interceptors.
 	for i := range p.interceptors {
 		if err := p.interceptors[i].Intercept(pr.Response); err != nil {
