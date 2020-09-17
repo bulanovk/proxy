@@ -28,9 +28,7 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
-	"github.com/bulanovk/proxy/pkg/adaptor"
 	"github.com/bulanovk/proxy/pkg/portmulpilexer"
-	"github.com/valyala/fasthttp"
 	"io"
 	"io/ioutil"
 	"log"
@@ -453,7 +451,8 @@ func (p *Proxy) StartSplit(addr string) error {
 
 	log.Printf("Listening for HTTP requests at %s (SSL/TLS mode)\n", addr)
 
-	srv := &fasthttp.Server{Handler: adaptor.NewFastHTTPHandler(p), MaxRequestBodySize: 4 * 1024 * 1024 * 1024, ReduceMemoryUsage: true, IdleTimeout: time.Second * 5}
+	//srv := &fasthttp.Server{Handler: adaptor.NewFastHTTPHandler(p), MaxRequestBodySize: 4 * 1024 * 1024 * 1024, ReduceMemoryUsage: true, IdleTimeout: time.Second * 5}
+	srv := &http.Server{Handler: p /* MaxRequestBodySize: 4 * 1024 * 1024 * 1024, ReduceMemoryUsage: true, */, IdleTimeout: time.Second * 5}
 
 	if err := srv.Serve(tlsListener); err != nil {
 		return err
